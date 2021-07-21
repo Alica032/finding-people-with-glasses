@@ -21,13 +21,12 @@ class YandexScraper:
         for i in range(50): 
             self.driver.execute_script(f'scrollBy({value},+500);')
             value += 500
-            print(i)
             time.sleep(5)
             self.download()
 
     def download(self):
         elements = self.driver.find_elements_by_xpath('//div[contains(@class,"serp-item serp-item_type_search")]')
-        for element in elements[-20:]:
+        for element in elements:
             data = element.get_attribute('data-bem')
             data = json.loads(data)
             try:
