@@ -10,7 +10,7 @@ from settings import SCRAPER_FOLDER
 class YandexScraper:
     def __init__(self, folder=SCRAPER_FOLDER):
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
-        self.list_urls = []
+        self.list_urls = set()
         self.forder = folder
 
     def run(self, text):
@@ -18,10 +18,10 @@ class YandexScraper:
         self.driver.get(f'https://yandex.ru/images/search?text={text}')
 
         value = 0
-        for i in range(50): 
+        for i in range(70): 
             self.driver.execute_script(f'scrollBy({value},+500);')
             value += 500
-            time.sleep(5)
+            time.sleep(15)
             self.download()
 
     def download(self):
@@ -32,7 +32,7 @@ class YandexScraper:
             try:
                 img_href = data['serp-item']['img_href']
                 if img_href != None and img_href not in self.list_urls:
-                    self.list_urls.append(img_href)
+                    self.list_urls.add(img_href)
                     format_file = img_href.split('.')[-1].lower()
                     if format_file not in ['jpg', 'png', 'jpeg']:
                         format_file = 'webp'
