@@ -15,7 +15,7 @@
 
 > python selection_images.py
 
-## результат
+## Результат
 
 https://drive.google.com/file/d/1a39tQcSyk3YJMWMhsKuk1dyL-R7t4KFz/view?usp=sharing
 
